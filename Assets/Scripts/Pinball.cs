@@ -32,6 +32,7 @@ public class Pinball : MonoBehaviour
         {
             Destroy(gameObject);
             gameManager.CleanUpHitPins();
+            gameManager.canFirePinball = true;
         }
     }
 

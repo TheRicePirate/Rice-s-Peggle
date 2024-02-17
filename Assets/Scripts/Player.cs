@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private GameManager gameManager;
+
     [SerializeField] private float fireVolume = 1.0f;
     [SerializeField] private float shooterRotation;
     [SerializeField] private float initialVelocity = 12000.0f;
@@ -13,17 +15,22 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         AimAtPlayerCursor();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && gameManager.canFirePinball)
         {
+            gameManager.canFirePinball = false;
             FirePinball();
         }
+
     }
+
+
 
     void AimAtPlayerCursor()
     {

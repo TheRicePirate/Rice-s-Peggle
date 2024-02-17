@@ -728,6 +728,7 @@ MonoBehaviour:
   hitPins: []
   bluePinCount: 40
   redPinCount: 15
+  canFirePinball: 1
 --- !u!1 &1088714098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2213773803648826602, guid: 81d9adb528992e8449e6d35d329f1fff, type: 3}
@@ -863,8 +864,8 @@ Transform:
   m_GameObject: {fileID: 1598917880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0503, y: 0.0128, z: 0}
-  m_LocalScale: {x: 1.31424, y: 1.3970742, z: 1}
+  m_LocalPosition: {x: -0.0044, y: -0.0067, z: 0}
+  m_LocalScale: {x: 1.3035947, y: 1.3916256, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

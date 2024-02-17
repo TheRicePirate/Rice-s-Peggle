@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> hitPins = new List<GameObject>();
     public int bluePinCount;
     public int redPinCount;
-
+    public bool canFirePinball = true;
 
     // Start is called before the first frame update
     void Start()
@@ -51,5 +51,4 @@ public class GameManager : MonoBehaviour
             Destroy(hitPin);
         }
     }
-
 }
