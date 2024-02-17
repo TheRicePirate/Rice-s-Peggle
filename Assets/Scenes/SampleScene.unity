@@ -723,6 +723,7 @@ MonoBehaviour:
   - {fileID: 3597643934270561470, guid: 36e61111b63443c4c86da4efca6600f4, type: 3}
   bluePinCount: 20
   redPinCount: 15
+  minPinDistance: 1
 --- !u!4 &1374968430
 Transform:
   m_ObjectHideFlags: 0

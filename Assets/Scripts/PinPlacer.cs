@@ -11,14 +11,13 @@ public class PinPlacer : MonoBehaviour
     [SerializeField] private GameObject[] PinTypes;
     [SerializeField] private int bluePinCount;
     [SerializeField] private int redPinCount;
-
+    [SerializeField] private float minPinDistance;
 
     private float sideBoundaryPos;
     private float upperHorizontalBoundaryPos;
     private float lowerHorizontalBoundaryPos;
-    private bool foundValidPos = true;
-    private UnityEngine.Vector2 pinSpawnLocation;
-    private List<UnityEngine.Vector2> pinLocations;
+    private List<Vector2> pinLocations = new List<Vector2>();
+    private Vector2 workingSpawnLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -38,46 +37,55 @@ public class PinPlacer : MonoBehaviour
         
     }
 
+    Vector2 GenerateSpawnLocation()
+    {
+        float xPositionPin = Random.Range(-sideBoundaryPos, sideBoundaryPos);
+        float yPositionPin = Random.Range(lowerHorizontalBoundaryPos, upperHorizontalBoundaryPos);
+        return new Vector2(xPositionPin, yPositionPin);
+    }
+
     void SpawnPins()
     {
         for (int i = 0; i < bluePinCount; i++) 
         {
-            while (foundValidPos == false)
+            Debug.Log(i);
+            // Initializes pinLocations list to permit the for loop
+            if (i == 0)
             {
-                //e
-                float xPositionPin = Random.Range(-sideBoundaryPos, sideBoundaryPos);
-                float yPositionPin = Random.Range(lowerHorizontalBoundaryPos, upperHorizontalBoundaryPos);
-                UnityEngine.Vector2 pinSpawnLocation = new Vector2(xPositionPin, yPositionPin);
+                Vector2 spawnLocation = GenerateSpawnLocation();
+                Instantiate(PinTypes[0], spawnLocation, Quaternion.identity);
+                pinLocations.Add(spawnLocation);
+                continue;
+            }
+
+            while (true)
+            {
+                bool isValidPinDistance = true;
+                workingSpawnLocation = GenerateSpawnLocation();
                 List<float> distances = new List<float>();  
 
                 foreach (UnityEngine.Vector2 existingPinLocation in pinLocations)
                 {
-                    if (Vector2.Distance(pinSpawnLocation, existingPinLocation) < 1)
+                    distances.Add(Vector2.Distance(workingSpawnLocation, existingPinLocation));
+                }
+
+                foreach (float distance in distances)
+                {
+                    if (distance < minPinDistance)
                     {
-                        foundValidPos = false;
+                        isValidPinDistance = false;
                         break;
                     }
                 }
 
-                if (foundValidPos)
+                if (isValidPinDistance)
                 {
-
-                    Instantiate(PinTypes[0], pinSpawnLocation, Quaternion.identity);
-
+                    break;
                 }
-
             }
-                UnityEngine.Vector2 pinSpawnLocation = new Vector2(xPositionPin, yPositionPin);
-                Instantiate(PinTypes[0], pinSpawnLocation, Quaternion.identity);                
-        }
 
-        for (int i = 0; i < redPinCount; i++)
-        {
-            float xPositionPin = Random.Range(-sideBoundaryPos, sideBoundaryPos);
-            float yPositionPin = Random.Range(lowerHorizontalBoundaryPos, upperHorizontalBoundaryPos);
-            UnityEngine.Vector2 pinSpawnLocation = new Vector2(xPositionPin, yPositionPin);
-            Instantiate(PinTypes[1], pinSpawnLocation, Quaternion.identity);
+            Instantiate(PinTypes[0], workingSpawnLocation, Quaternion.identity);
+            pinLocations.Add(workingSpawnLocation);
         }
-
     }
 }
