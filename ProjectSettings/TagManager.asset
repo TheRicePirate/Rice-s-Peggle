@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pinball
   - Pin
+  - PinballDestroyer
   layers:
   - Default
   - TransparentFX

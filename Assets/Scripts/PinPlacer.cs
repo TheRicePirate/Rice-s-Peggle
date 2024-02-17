@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PinPlacer : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+
+    // Borders
     [SerializeField] private GameObject sideBorder;
     [SerializeField] private GameObject upperSpawnBorder;
     [SerializeField] private GameObject lowerSpawnBorder;
 
+    // Pin values
     [SerializeField] private GameObject[] PinTypes;
-    [SerializeField] private int bluePinCount;
-    [SerializeField] private int redPinCount;
     [SerializeField] private float minPinDistance;
+    private int bluePinCount;
+    private int redPinCount;
 
+    // Positions
     private float sideBoundaryPos;
     private float upperHorizontalBoundaryPos;
     private float lowerHorizontalBoundaryPos;
@@ -22,19 +27,14 @@ public class PinPlacer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         sideBoundaryPos = sideBorder.transform.position.x;
         upperHorizontalBoundaryPos = upperSpawnBorder.transform.position.y;
         lowerHorizontalBoundaryPos = lowerSpawnBorder.transform.position.y;
-        Debug.Log(upperHorizontalBoundaryPos);
-        Debug.Log(lowerHorizontalBoundaryPos);
-        Debug.Log(sideBoundaryPos);
-        SpawnPins();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        bluePinCount = gameManager.bluePinCount;
+        redPinCount = gameManager.redPinCount;
+        PinSpawner(PinTypes[0], bluePinCount);
+        PinSpawner(PinTypes[1], redPinCount);
     }
 
     Vector2 GenerateSpawnLocation()
@@ -44,16 +44,15 @@ public class PinPlacer : MonoBehaviour
         return new Vector2(xPositionPin, yPositionPin);
     }
 
-    void SpawnPins()
+    void PinSpawner(GameObject pinType, int pinAmount)
     {
-        for (int i = 0; i < bluePinCount; i++) 
+        for (int i = 0; i < pinAmount; i++) 
         {
-            Debug.Log(i);
             // Initializes pinLocations list to permit the for loop
-            if (i == 0)
+            if (pinLocations.Count == 0)
             {
                 Vector2 spawnLocation = GenerateSpawnLocation();
-                Instantiate(PinTypes[0], spawnLocation, Quaternion.identity);
+                Instantiate(pinType, spawnLocation, Quaternion.identity);
                 pinLocations.Add(spawnLocation);
                 continue;
             }
@@ -84,7 +83,7 @@ public class PinPlacer : MonoBehaviour
                 }
             }
 
-            Instantiate(PinTypes[0], workingSpawnLocation, Quaternion.identity);
+            Instantiate(pinType, workingSpawnLocation, Quaternion.identity);
             pinLocations.Add(workingSpawnLocation);
         }
     }
