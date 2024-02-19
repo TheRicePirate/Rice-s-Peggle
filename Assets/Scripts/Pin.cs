@@ -22,32 +22,47 @@ public class Pin : MonoBehaviour
     private bool audioPlayed = false;
     [SerializeField] private float soundEffectVolume = 1.0f;
     [SerializeField] private Light2D light2D;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource normalHitSound;
+    [SerializeField] private AudioSource superHitSound;
     
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        Debug.Log(transform.position);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnScoreDisplay(Sprite scoreSprite)
     {
-        
+        GameObject spawnedScoreDisplay = Instantiate(scoreDisplayPrefab, transform.position, Quaternion.identity);
+        ScoreDisplay scoreDisplay = spawnedScoreDisplay.GetComponent<ScoreDisplay>();
+        scoreDisplay.scoreDisplaySprite = scoreSprite;
+    }
+
+    private void PlayHitSound(AudioSource hitSoundEffect)
+    {
+        if (!audioPlayed)
+        {
+            hitSoundEffect.PlayOneShot(hitSoundEffect.clip, soundEffectVolume);
+            audioPlayed = true;
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision != null && audioPlayed == false && !gameManager.inSuperMode) 
+        light2D.enabled = true;
+        if (collision != null && audioPlayed == false) 
         {
-            audioSource.PlayOneShot(audioSource.clip, soundEffectVolume);
-            light2D.enabled = true;
-            audioPlayed = true;
-            GameObject spawnedScoreDisplay = Instantiate(scoreDisplayPrefab, transform.position, Quaternion.identity);
-            Debug.Log("Found spawned score display");
-            ScoreDisplay scoreDisplay = spawnedScoreDisplay.GetComponent<ScoreDisplay>();
-            scoreDisplay.scoreDisplaySprite = normalScoreDisplay;
+            if (gameManager.inSuperMode && pinType != PinType.Red)
+            {
+                PlayHitSound(superHitSound);
+                SpawnScoreDisplay(superScoreDisplay);
+            }
+            else
+            {
+                PlayHitSound(normalHitSound);
+                SpawnScoreDisplay(normalScoreDisplay);
+            }
         }
     }
 }
