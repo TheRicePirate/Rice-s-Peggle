@@ -45,13 +45,16 @@ public class PinballCatcher : MonoBehaviour
         }
     }
 
+    // Pinball is caught
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(collision.gameObject);
         gameManager.canFirePinball = true;
         gameManager.CleanUpHitPins();
+        gameManager.numPinballs++;
     }
 
+    // Moving left and right
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "RightBorder")

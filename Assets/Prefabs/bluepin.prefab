@@ -135,6 +135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61741406b8d5454084cddad13e34bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pinType: 0
+  scoreDisplayPrefab: {fileID: 2109029460040731471, guid: a6a09078d1a8b6e4e87f2c52f11b5e46, type: 3}
+  notHit: 1
+  normalScoreDisplay: {fileID: 21300000, guid: 4467e5adc36facd4a87ea288ca584568, type: 3}
+  superScoreDisplay: {fileID: 21300000, guid: c2e2d8697c944fd47aabb5a45c86877a, type: 3}
   soundEffectVolume: 1
   light2D: {fileID: 7393782068853617877}
   audioSource: {fileID: -6380510834036432380}

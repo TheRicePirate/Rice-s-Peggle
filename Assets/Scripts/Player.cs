@@ -22,9 +22,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         AimAtPlayerCursor();
-        if (Input.GetMouseButtonDown(0) && gameManager.canFirePinball)
+        if (Input.GetMouseButtonDown(0) && gameManager.canFirePinball && gameManager.numPinballs != 0)
         {
             gameManager.canFirePinball = false;
+            gameManager.numPinballs--;
             FirePinball();
         }
 

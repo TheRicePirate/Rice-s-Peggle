@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI numPinballsText;
     public List<GameObject> hitPins = new List<GameObject>();
+    public int numPinballs;
     public int bluePinCount;
     public int redPinCount;
     public bool canFirePinball = true;
+    public bool inSuperMode = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -21,8 +24,10 @@ public class GameManager : MonoBehaviour
     {
         if (redPinCount == 0)
         {
-            SceneManager.LoadScene("SampleScene");
+            RestartGame();
         }
+        numPinballsText.text = $"Pinballs: {numPinballs.ToString()}";
+
     }
 
     public void AddToHitPins(GameObject hitPin)
@@ -50,5 +55,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(hitPin);
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 }

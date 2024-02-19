@@ -16,7 +16,7 @@ public class Pinball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb2d.velocity.magnitude == 0)
+        if (rb2d.velocity == Vector2.zero)
         {
             gameManager.CleanUpHitPins();
         }
@@ -32,7 +32,14 @@ public class Pinball : MonoBehaviour
         {
             Destroy(gameObject);
             gameManager.CleanUpHitPins();
-            gameManager.canFirePinball = true;
+            if (gameManager.numPinballs == 0)
+            {
+                gameManager.RestartGame();
+            }
+            else
+            {
+                gameManager.canFirePinball = true;
+            }
         }
     }
 

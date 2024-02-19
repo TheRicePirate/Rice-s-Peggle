@@ -55,3 +55,6 @@ TagManager:
   - name: Obstacles
     uniqueID: 1704470091
     locked: 0
+  - name: ScoreLayer
+    uniqueID: 558309319
+    locked: 0
