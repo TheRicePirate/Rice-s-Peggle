@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bluePinCount == 0 && redPinCount == 0)
+        if (redPinCount == 0)
         {
             SceneManager.LoadScene("SampleScene");
         }
