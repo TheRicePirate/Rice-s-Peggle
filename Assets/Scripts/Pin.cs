@@ -57,9 +57,20 @@ public class Pin : MonoBehaviour
             {
                 PlayHitSound(superHitSound);
                 SpawnScoreDisplay(superScoreDisplay);
+
+
             }
             else
             {
+                if (pinType == PinType.Red)
+                {
+                    gameManager.playerScore += 200;
+                }
+                else
+                {
+                    gameManager.playerScore += 50;
+                }
+
                 PlayHitSound(normalHitSound);
                 SpawnScoreDisplay(normalScoreDisplay);
             }

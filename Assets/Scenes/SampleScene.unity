@@ -886,8 +886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: 275}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 183.97107, y: 275}
+  m_SizeDelta: {x: 432.0578, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &723273533
 MonoBehaviour:
@@ -952,7 +952,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1031,10 +1031,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numPinballsText: {fileID: 1677621858}
+  scoreText: {fileID: 723273533}
   hitPins: []
   numPinballs: 10
-  bluePinCount: 30
-  redPinCount: 15
+  bluePinCount: 999999
+  redPinCount: 999999
+  playerScore: 0
   canFirePinball: 1
   inSuperMode: 0
 --- !u!1 &1088714098 stripped
@@ -1078,7 +1080,7 @@ MonoBehaviour:
   PinTypes:
   - {fileID: 6624552719962149390, guid: 0892df42cb58f284cb90f60c483fce31, type: 3}
   - {fileID: 3597643934270561470, guid: 36e61111b63443c4c86da4efca6600f4, type: 3}
-  minPinDistance: 1
+  minPinDistance: 0
 --- !u!4 &1374968430
 Transform:
   m_ObjectHideFlags: 0
