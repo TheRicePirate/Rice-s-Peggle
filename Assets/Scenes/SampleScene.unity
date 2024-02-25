@@ -1033,7 +1033,6 @@ MonoBehaviour:
   numPinballsText: {fileID: 1677621858}
   scoreText: {fileID: 723273533}
   hitPins: []
-  slowMotionScale: 0
   numPinballs: 10
   bluePinCount: 1
   redPinCount: 1
@@ -1041,10 +1040,9 @@ MonoBehaviour:
   canFirePinball: 1
   inSuperMode: 0
   isNearLastPin: 0
-  pinBallPosition: {x: 0, y: 0, z: 0}
-  followSpeed: 1
+  globalSpeedModifier: 35
+  slowMotionTimeScale: 0.25
   zoomSpeed: 1
-  pinBall: {fileID: 0}
   defaultCameraZoom: 5
   cameraZoom: 1.25
 --- !u!1 &1088714098 stripped
@@ -2748,8 +2746,8 @@ Transform:
   m_GameObject: {fileID: 1598917880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0044, y: -0.0067, z: 0}
-  m_LocalScale: {x: 1.3035947, y: 1.3916256, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -72,7 +72,7 @@ public class Pinball : MonoBehaviour
     {
         if (gameManager.redPinCount == 1)
         {
-            Time.timeScale = 0.1f;
+            Time.timeScale = gameManager.slowMotionTimeScale;
             gameManager.isNearLastPin = true;
             Camera.main.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -10);
         }

@@ -10,11 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI numPinballsText;
     [SerializeField] private TextMeshProUGUI scoreText;
 
-
-
     public List<GameObject> hitPins = new List<GameObject>();
-
-    [SerializeField] private float slowMotionScale;
     public int numPinballs;
     public int bluePinCount;
     public int redPinCount;
@@ -23,10 +19,11 @@ public class GameManager : MonoBehaviour
     public bool inSuperMode = false;
     public bool isNearLastPin = false;
 
+    // Dumb speed modifier for camera. Used to make things appear smoother.
+    [SerializeField] private float globalSpeedModifier = 35f;
 
-    [SerializeField] private float followSpeed = 10f;
+    public float slowMotionTimeScale = 0.25f;
     [SerializeField] private float zoomSpeed = 20f;
-    public Pinball pinBall;
     [SerializeField] private float defaultCameraZoom = 5.0f;
     [SerializeField] float cameraZoom = 1.25f;
     private Vector3 defaultCameraPosition;
@@ -46,25 +43,7 @@ public class GameManager : MonoBehaviour
             RestartGame();
         }*/
 
-        if (isNearLastPin)
-        {
-            pinBall = GameObject.FindAnyObjectByType<Pinball>();
-            Camera.main.orthographicSize -= zoomSpeed * Time.deltaTime * 35;
-            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, cameraZoom, 5f);
-
-
-
-            Vector3 targetPosition = pinBall.transform.position;
-            targetPosition.z = defaultCameraPosition.z; // Keep camera's z position unchanged
-            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetPosition, pinBall.rb2d.velocity.magnitude * Time.deltaTime * 35);
-        }
-        else
-        {
-            Time.timeScale = 1;
-            Camera.main.orthographicSize += zoomSpeed * Time.deltaTime * 35;
-            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, 1f, 5);
-            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, defaultCameraPosition, Time.deltaTime * 35);
-        }
+        CameraSupermodeZoom();
 
         numPinballsText.text = $"Pinballs: {numPinballs.ToString()}";
         scoreText.text = $"Score: {playerScore.ToString()}";
@@ -102,4 +81,24 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
+    private void CameraSupermodeZoom()
+    {
+        if (isNearLastPin)
+        {
+            Pinball pinBall = GameObject.FindAnyObjectByType<Pinball>();
+            Camera.main.orthographicSize -= zoomSpeed * Time.deltaTime * globalSpeedModifier;
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, cameraZoom, defaultCameraZoom);
+
+            Vector3 targetPosition = pinBall.transform.position;
+            targetPosition.z = defaultCameraPosition.z;
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetPosition, pinBall.rb2d.velocity.magnitude * Time.deltaTime * globalSpeedModifier);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Camera.main.orthographicSize += zoomSpeed * Time.deltaTime * globalSpeedModifier;
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, cameraZoom, defaultCameraZoom);
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, defaultCameraPosition, Time.deltaTime * globalSpeedModifier);
+        }
+    }
 }
