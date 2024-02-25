@@ -57,8 +57,6 @@ public class Pin : MonoBehaviour
             {
                 PlayHitSound(superHitSound);
                 SpawnScoreDisplay(superScoreDisplay);
-
-
             }
             else
             {

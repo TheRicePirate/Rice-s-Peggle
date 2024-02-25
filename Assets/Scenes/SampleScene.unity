@@ -1033,12 +1033,20 @@ MonoBehaviour:
   numPinballsText: {fileID: 1677621858}
   scoreText: {fileID: 723273533}
   hitPins: []
-  numPinballs: 10000
-  bluePinCount: 1000
-  redPinCount: 1000
+  slowMotionScale: 0
+  numPinballs: 10
+  bluePinCount: 1
+  redPinCount: 1
   playerScore: 0
   canFirePinball: 1
   inSuperMode: 0
+  isNearLastPin: 0
+  pinBallPosition: {x: 0, y: 0, z: 0}
+  followSpeed: 1
+  zoomSpeed: 1
+  pinBall: {fileID: 0}
+  defaultCameraZoom: 5
+  cameraZoom: 1.25
 --- !u!1 &1088714098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2213773803648826602, guid: 81d9adb528992e8449e6d35d329f1fff, type: 3}
