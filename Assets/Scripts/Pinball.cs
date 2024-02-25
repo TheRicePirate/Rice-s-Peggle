@@ -6,6 +6,10 @@ public class Pinball : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     private GameManager gameManager;
+    private bool ballStuck;
+    [SerializeField] private float stuckTime;
+    private float workingStuckTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +20,25 @@ public class Pinball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb2d.velocity == Vector2.zero)
+        if (rb2d.velocity == Vector2.zero && ballStuck == false)
+        {
+            ballStuck = true;
+            BallStuck();
+            ballStuck = false;
+        }
+        else
+        {
+            workingStuckTime = stuckTime;
+        }
+    }
+
+    private void BallStuck()
+    {
+        if (workingStuckTime > 0)
+        {
+            workingStuckTime -= Time.deltaTime;
+        }
+        else
         {
             gameManager.CleanUpHitPins();
         }
