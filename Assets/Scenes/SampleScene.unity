@@ -909,7 +909,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score:'
+  m_text: 'Score: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1032,16 +1032,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numPinballsText: {fileID: 1677621858}
   scoreText: {fileID: 723273533}
-  hitPins: []
-  numPinballs: 10
-  bluePinCount: 1
-  redPinCount: 1
+  minPinDistance: 1
+  numPinballs: 40
+  bluePinCount: 30
+  redPinCount: 15
   playerScore: 0
   canFirePinball: 1
   inSuperMode: 0
   isNearLastPin: 0
+  hitPins: []
   globalSpeedModifier: 35
-  slowMotionTimeScale: 0.25
+  slowMotionTimeScale: 0.05
   zoomSpeed: 1
   defaultCameraZoom: 5
   cameraZoom: 1.25
@@ -1086,7 +1087,6 @@ MonoBehaviour:
   PinTypes:
   - {fileID: 6624552719962149390, guid: 0892df42cb58f284cb90f60c483fce31, type: 3}
   - {fileID: 3597643934270561470, guid: 36e61111b63443c4c86da4efca6600f4, type: 3}
-  minPinDistance: 0
 --- !u!4 &1374968430
 Transform:
   m_ObjectHideFlags: 0
@@ -2746,8 +2746,8 @@ Transform:
   m_GameObject: {fileID: 1598917880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: -0.61, z: 0}
+  m_LocalScale: {x: 2.64, y: 2.67, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

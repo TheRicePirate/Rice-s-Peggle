@@ -13,7 +13,6 @@ public class PinPlacer : MonoBehaviour
 
     // Pin values
     [SerializeField] private GameObject[] PinTypes;
-    [SerializeField] private float minPinDistance;
     private int bluePinCount;
     private int redPinCount;
 
@@ -70,7 +69,7 @@ public class PinPlacer : MonoBehaviour
 
                 foreach (float distance in distances)
                 {
-                    if (distance < minPinDistance)
+                    if (distance < gameManager.minPinDistance)
                     {
                         isValidPinDistance = false;
                         break;

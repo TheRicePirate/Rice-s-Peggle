@@ -50,6 +50,11 @@ public class Pinball : MonoBehaviour
     {
         if (collision.gameObject.tag == "Pin") 
         {
+            Pin pin = collision.gameObject.GetComponent<Pin>();
+            if (pin.pinType == PinType.Red && gameManager.redPinCount == 1)
+            {
+                gameManager.isNearLastPin = false;
+            }
             gameManager.AddToHitPins(collision.gameObject);  
         }
         if (collision.gameObject.tag == "PinballDestroyer")
@@ -70,7 +75,8 @@ public class Pinball : MonoBehaviour
     // Method to detect if pin is about to hit last red pin
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameManager.redPinCount == 1)
+        Pin pin = collision.gameObject.GetComponent<Pin>();
+        if (gameManager.redPinCount == 1 && pin.notHit)
         {
             Time.timeScale = gameManager.slowMotionTimeScale;
             gameManager.isNearLastPin = true;

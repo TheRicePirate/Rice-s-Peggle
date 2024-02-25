@@ -7,18 +7,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("UI Information")]
     [SerializeField] private TextMeshProUGUI numPinballsText;
     [SerializeField] private TextMeshProUGUI scoreText;
 
-    public List<GameObject> hitPins = new List<GameObject>();
+
+    [Header("Pin Setup")]
+    public float minPinDistance;
     public int numPinballs;
     public int bluePinCount;
     public int redPinCount;
-    public int playerScore;
-    public bool canFirePinball = true;
-    public bool inSuperMode = false;
-    public bool isNearLastPin = false;
+    [HideInInspector] public int playerScore;
+    [HideInInspector] public bool canFirePinball = true;
+    [HideInInspector] public bool inSuperMode = false;
+    [HideInInspector] public bool isNearLastPin = false;
+    [HideInInspector] public List<GameObject> hitPins = new List<GameObject>();
 
+    [Header("Camera Settings")]
     // Dumb speed modifier for camera. Used to make things appear smoother.
     [SerializeField] private float globalSpeedModifier = 35f;
 
